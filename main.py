@@ -21,20 +21,19 @@ def sentiment_predict(new_sentence):
     pad_new = pad_sequences(encoded, maxlen = MAX_LEN) # 패딩
     score = float(loaded_model.predict(pad_new)) # 예측
     if(score > 0.5):
-        print("긍정 리뷰입니다.\n".format(score * 100))
+        return "긍정 리뷰입니다.\n".format(score * 100)
     else:
-        print("부정 리뷰입니다.\n".format((1 - score) * 100))
+        return "부정 리뷰입니다.\n".format((1 - score) * 100)
 
 def getPN(text):
   return model.predict([text])
 
-test_text = st.text_input('Movie title', 'Life of Brian')
+test_text = st.text_input('긍정/부정 문장 판독', 'placeholder')
 
 st.write("hello")
 
 
 btn_clicked = st.button('결과 보기')
 if btn_clicked:
-  st.write("Clicked")
-else:
-  st.write("not Clicked")
+  st.write(sentiment_predict(test_text))
+
