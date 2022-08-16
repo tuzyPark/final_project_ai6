@@ -1,9 +1,9 @@
 from tensorflow import keras
 import streamlit as st
 import numpy as np
-import tensorflow as tf
-from tensorflow.keras.preprocessing.text.tokenizer import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
+import tensorflow
+from tensorflow.keras.preprocessing.text.tokenizer import *
+from tensorflow.keras.preprocessing.sequence import *
 from konlpy.tag import Okt
 
 
