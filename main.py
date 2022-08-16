@@ -41,4 +41,5 @@ st.write("hello")
 btn_clicked = st.button('결과 보기')
 if btn_clicked:
   st.write(sentiment_predict(test_text))
+  st.write(test_text)
 
