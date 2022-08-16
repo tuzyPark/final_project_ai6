@@ -15,4 +15,5 @@ beautifulsoup4
 konlpy
 jvm
 pypi
+default-jre
 #####
