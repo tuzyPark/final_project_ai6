@@ -1,5 +1,4 @@
 streamlit
-pickle
 matplotlib==3.5.1
 lxml
 numpy==1.22.0
