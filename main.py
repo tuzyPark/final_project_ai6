@@ -14,6 +14,7 @@ model_path = 'model/best_model_1.h5'
 model = keras.models.load_model(model_path)
 okt = Okt()
 
+stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
 
 def sentiment_predict(new_sentence):
     new_sentence = re.sub(r'[^ㄱ-ㅎㅏ-ㅣ가-힣 ]','', new_sentence)
