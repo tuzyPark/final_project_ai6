@@ -2,9 +2,11 @@ from tensorflow import keras
 import streamlit as st
 import numpy as np
 import tensorflow as tf
+import re
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from konlpy.tag import Okt
+
 
 
 MAX_LEN = 30
