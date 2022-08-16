@@ -1,6 +1,6 @@
 from tensorflow import keras
 import numpy as np
-import tensorflow tf
+import tensorflow as tf
 
 
 model_path = 'model/best_model_1.h5'
