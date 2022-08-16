@@ -5,7 +5,7 @@ import tensorflow as tf
 import re
 import json
 from keras.models import load_model
-from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.text import Tokenizer, tokenizer_from_json
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from konlpy.tag import Okt
 import streamlit as st
