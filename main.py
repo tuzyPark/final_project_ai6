@@ -33,7 +33,7 @@ def sentiment_predict(new_sentence):
 def getPN(text):
   return model.predict([text])
 
-test_text = st.text_input('긍정/부정 문장 판독', 'placeholder')
+test_text = st.text_input('긍정/부정 문장 판독', '이거 ')
 
 st.write("hello")
 
