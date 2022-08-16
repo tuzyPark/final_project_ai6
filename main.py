@@ -23,7 +23,7 @@ def sentiment_predict(new_sentence):
     new_sentence = [word for word in new_sentence if not word in stopwords] # 불용어 제거
     encoded = tokenizer.texts_to_sequences([new_sentence]) # 정수 인코딩
     pad_new = pad_sequences(encoded, maxlen = MAX_LEN) # 패딩
-    score = float(loaded_model.predict(pad_new)) # 예측
+    score = float(model.predict(pad_new)) # 예측
     if(score > 0.5):
         return "긍정 리뷰입니다.\n".format(score * 100)
     else:
