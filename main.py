@@ -47,7 +47,7 @@ def sentiment_predict(new_sentence):
 def blah():
     origin_df = pd.read_csv('data/origin.csv')
     summary_df = pd.read_csv('data/df_placesummary.csv')
-    df = origin_df.concat(summary_df, axis=1)
+    df = pd.concat([origin_df, summary_df], axis=1)
     st.dataframe(df)
     
 
