@@ -13,4 +13,5 @@ opencv-python-headless
 requests
 beautifulsoup4
 konlpy
+jvm
 #####
