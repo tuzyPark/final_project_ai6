@@ -17,5 +17,5 @@ st.write("hello")
 btn_clicked = st.button('결과 보기')
 if btn_clicked:
   st.write("Clicked")
- else:
+else:
   st.write("not Clicked")
