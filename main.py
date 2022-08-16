@@ -25,14 +25,14 @@ stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','
 
 def sentiment_predict(new_sentence):
     new_sentence = re.sub(r'[^ㄱ-ㅎㅏ-ㅣ가-힣 ]','', new_sentence)
+    st.write(new_sentence)
     new_sentence = okt.morphs(new_sentence, stem=True) # 토큰화
+    st.write(new_sentence)
     new_sentence = [word for word in new_sentence if not word in stopwords] # 불용어 제거
     encoded = tokenizer.texts_to_sequences([new_sentence]) # 정수 인코딩
-    st.write(encoded)
     pad_new = pad_sequences(encoded, maxlen = MAX_LEN) # 패딩
-    st.write(pad_new)
     score = float(model.predict(pad_new)) # 예측
-    st.write(score)
+    
     
     if(score > 0.5):
         return str(score)+"긍정 리뷰입니다.\n".format(score * 100)
