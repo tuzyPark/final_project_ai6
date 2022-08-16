@@ -18,22 +18,20 @@ from streamlit_bokeh_events import streamlit_bokeh_events
 MAX_LEN = 30
 model_path = 'model/food_review.h5'
 model = load_model(model_path)
-tokenizer = Tokenizer()
+with open('tokenizer.pickle', 'rb') as handle:
+    tokenizer = pickle.load(handle)
 
 okt = Okt()
 
 stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
 
 def sentiment_predict(new_sentence):
-    tokenizer.fit_on_texts([new_sentence])
     new_sentence = re.sub(r'[^ㄱ-ㅎㅏ-ㅣ가-힣 ]','', new_sentence)
-    print(new_sentence)
     new_sentence = okt.morphs(new_sentence, stem=True) # 토큰화
-    print(new_sentence)
     new_sentence = [word for word in new_sentence if not word in stopwords] # 불용어 제거
-    print(new_sentence)
+    
     encoded = tokenizer.texts_to_sequences([new_sentence]) # 정수 인코딩
-    print(encoded)
+    
     pad_new = pad_sequences(encoded, maxlen = MAX_LEN) # 패딩
     score = float(model.predict(pad_new)) # 예측
     
