@@ -7,7 +7,7 @@ from keras.models import load_model
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from konlpy.tag import Okt
-
+import pickle
 import streamlit as st
 from bokeh.models.widgets import Button
 from bokeh.models import CustomJS
