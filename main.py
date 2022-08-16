@@ -24,10 +24,11 @@ def sentiment_predict(new_sentence):
     encoded = tokenizer.texts_to_sequences([new_sentence]) # 정수 인코딩
     pad_new = pad_sequences(encoded, maxlen = MAX_LEN) # 패딩
     score = float(model.predict(pad_new)) # 예측
+    
     if(score > 0.5):
-        return "긍정 리뷰입니다.\n".format(score * 100)
+        return str(score)+"긍정 리뷰입니다.\n".format(score * 100)
     else:
-        return "부정 리뷰입니다.\n".format((1 - score) * 100)
+        return str(score)+"부정 리뷰입니다.\n".format((1 - score) * 100)
 
 def getPN(text):
   return model.predict([text])
