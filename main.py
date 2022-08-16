@@ -14,4 +14,8 @@ model = keras.models.load_model(model_path)
 test_text = st.text_input('Movie title', 'Life of Brian')
 
 st.write("hello")
-btn = st.button('결과 보기')
+btn_clicked = st.button('결과 보기')
+if btn_clicked:
+  st.write("Clicked")
+ else:
+  st.write("not Clicked")
