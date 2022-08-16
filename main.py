@@ -1,6 +1,7 @@
 from tensorflow import keras
 import streamlit as st
 import numpy as np
+import pandas as pd
 import tensorflow as tf
 import re
 import json
@@ -43,8 +44,10 @@ def sentiment_predict(new_sentence):
     else:
         return str(score)+"부정 리뷰입니다.\n".format((1 - score) * 100)
 
-def getPN(text):
-  return model.predict([text])
+def blah():
+    df = pd.read_csv('data/index_reset.csv')
+    st.dataframe(df)
+    
 
 test_text = st.text_input('긍정/부정 문장 판독', '이거 ')
 
@@ -56,6 +59,8 @@ if btn_clicked:
   st.write(sentiment_predict(test_text))
   st.write(test_text)
 
+    
+blah()
     
     
     
