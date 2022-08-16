@@ -45,7 +45,9 @@ def sentiment_predict(new_sentence):
         return str(score)+"부정 리뷰입니다.\n".format((1 - score) * 100)
 
 def blah():
-    df = pd.read_csv('data/index_reset.csv')
+    origin_df = pd.read_csv('data/index_reset.csv')
+    summary_df = pd.read_csv('data/df_summary.csv')
+    pd.merge(origin_df, summary_df, left_on='
     st.dataframe(df)
     
 
