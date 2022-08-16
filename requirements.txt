@@ -15,4 +15,5 @@ beautifulsoup4
 konlpy
 jvm
 PyPI
+streamlit-bokeh-events
 #####
