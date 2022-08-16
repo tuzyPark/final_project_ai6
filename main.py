@@ -18,8 +18,9 @@ from streamlit_bokeh_events import streamlit_bokeh_events
 MAX_LEN = 30
 model_path = 'model/food_review.h5'
 model = load_model(model_path)
-with open('tokenizer.pickle', 'rb') as handle:
-    tokenizer = pickle.load(handle)
+with open('tokenizer.json') as f:
+    data = json.load(f)
+    tokenizer = tokenizer_from_json(data)
 
 okt = Okt()
 
