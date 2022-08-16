@@ -47,8 +47,7 @@ def sentiment_predict(new_sentence):
 def blah():
     origin_df = pd.read_csv('data/origin.csv')
     summary_df = pd.read_csv('data/df_placesummary.csv')
-    st.write(origin_df.duplicated())
-    df = pd.merge(origin_df, summary_df, left_on='상호지점명', right_on='searchName')
+    df = pd.concat(origin_df, summary_df, axis=1)
     st.dataframe(df)
     
 
