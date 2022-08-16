@@ -23,6 +23,7 @@ okt = Okt()
 stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
 
 def sentiment_predict(new_sentence):
+    print(new_sentence)
     new_sentence = re.sub(r'[^ㄱ-ㅎㅏ-ㅣ가-힣 ]','', new_sentence)
     new_sentence = okt.morphs(new_sentence, stem=True) # 토큰화
     new_sentence = [word for word in new_sentence if not word in stopwords] # 불용어 제거
