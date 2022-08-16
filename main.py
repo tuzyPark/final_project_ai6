@@ -15,7 +15,7 @@ from streamlit_bokeh_events import streamlit_bokeh_events
 
 
 MAX_LEN = 30
-model_path = 'model/best_model_1.h5'
+model_path = 'model/food_review.h5'
 model = keras.models.load_model(model_path)
 tokenizer = Tokenizer()
 okt = Okt()
