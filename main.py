@@ -12,6 +12,7 @@ from konlpy.tag import Okt
 MAX_LEN = 30
 model_path = 'model/best_model_1.h5'
 model = keras.models.load_model(model_path)
+tokenizer = Tokenizer()
 okt = Okt()
 
 stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
