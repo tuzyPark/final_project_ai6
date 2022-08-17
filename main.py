@@ -20,6 +20,7 @@ from haversine import haversine
 MAX_LEN = 30
 model_path = 'model/food_review.h5'
 model = load_model(model_path)
+df = pd.read_csv('data/last_df')
 with open('model/tokenizer.json') as f:
     data = json.load(f)
     tokenizer = tokenizer_from_json(data)
@@ -44,11 +45,11 @@ def sentiment_predict(new_sentence):
     else:
         return str(score)+"부정 리뷰입니다.\n".format((1 - score) * 100)
 
-def blah():
-    origin_df = pd.read_csv('data/origin.csv')
-    summary_df = pd.read_csv('data/df_placesummary.csv')
-    df = pd.concat([origin_df, summary_df], axis=1)
-    return df
+#def blah():
+#    origin_df = pd.read_csv('data/origin.csv')
+#    summary_df = pd.read_csv('data/df_placesummary.csv')
+#    df = pd.concat([origin_df, summary_df], axis=1)
+#    return df
     
 
 test_text = st.text_input('긍정/부정 문장 판독', '이거 ')
@@ -62,7 +63,7 @@ if btn_clicked:
   st.write(test_text)
 
     
-blah()
+
     
 def distance(origin_lat, origin_lng, destination_lat, destination_lng):
     origin = (origin_lat, origin_lng)
@@ -96,7 +97,7 @@ if result:
 dis=distance(result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon'], 37.563953,127.007410)    
 st.write(dis)
 
-df=blah()
+st.write(df)
 for x, y in zip(df['위도'], df['경도']):
     dis=distance(result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon'],x ,y)
     if dis<400000:
