@@ -225,9 +225,11 @@ def get_comments_5_place(df, display=300, page=1):
 
 
 def blah2():
-    temp_dict = blah(get_comments_5_place(get_near_placesummary(df)))
+    placesummary_5_ = get_comments_5_place(get_near_placesummary(df))
+    temp_dict = blah(placesummary_5_)
+    
     for id in temp_dict:
-        with st.expander(f'{id} 긍정 댓글 백분율 : {temp_dict[id]["pp"]}'):
+        with st.expander(f'{placesummary_5_.loc[placesummary_5_["id"]==id, "상호지점명"]} 긍정 댓글 백분율 : {temp_dict[id]["pp"]}'):
             st.markdown("## 긍정")
             with st.container():
                 for pc in temp_dict[id]["pc"]:
