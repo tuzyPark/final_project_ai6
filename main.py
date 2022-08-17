@@ -1,6 +1,7 @@
 from tensorflow import keras
 import streamlit as st
 import numpy as np
+import numpy.ma as ma
 import pandas as pd
 import tensorflow as tf
 import re
@@ -88,7 +89,8 @@ def blah(place_dict):
     #   -> list를 pos_list, neg_list 분리
     #   -> 긍정 퍼센테이지 계산
     for id in place_dict:
-        st.write(place_dict[id][is_positive_sentences(place_dict[id])])
+        st.write(ma.masked_array(place_dict[id], mask=is_positive_sentences(place_dict[id]))
+        
         
     
 
