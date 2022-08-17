@@ -174,14 +174,14 @@ def get_comments_nearest_5_place(df):
     st.write(id_list)
     comments_dict = {}
     for id in id_list:
-        comments_dict[id] = get_comments(id, display, page)
+        comments_dict[id] = get_comments(str(id), display, page)
         time.sleep(0.5)
     
     return comments_dict
     
     
     
-#st.write(get_comments_nearest_5_place(get_near_placesummary(df)))
+st.write(get_comments_nearest_5_place(get_near_placesummary(df)))
 
     
 def get_comments_nearest_5_place_():
@@ -196,7 +196,7 @@ def get_comments_nearest_5_place_():
     
     return comments_dict
     
-st.write(get_comments_nearest_5_place_())
+#st.write(get_comments_nearest_5_place_())
 
 
 if result:
