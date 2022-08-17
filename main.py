@@ -65,6 +65,23 @@ def is_positive_sentence(new_sentence):
     else:
         return False
 
+def test_is_positive_sentence(sentences):
+    ["맛있다", "여기 괜찮네요", "이건 어때요"]
+    
+    for sentence in sentences:
+        sentence = re.sub(r'[^ㄱ-ㅎㅏ-ㅣ가-힣 ]','', sentence)
+        sentence = okt.morphs(sentence, stem=True) # 토큰화
+        sentence = [word for word in sentence if not word in stopwords]
+    
+    
+    encoded = tokenizer.texts_to_sequences(sentences) # 정수 인코딩
+    
+    pad_new = pad_sequences(encoded, maxlen = MAX_LEN) # 패딩
+    score = model.predict(pad_new) # 예측
+    return score
+    
+st.write(test_is_positive_sentence(["맛있다", "여기 괜찮네요", "이건 어때요"]))
+
 def get_near_placesummary(df):
     """
         현재 위도, 경도 기반 가장 가까운 5개 업체 정보 받아오는 함수
