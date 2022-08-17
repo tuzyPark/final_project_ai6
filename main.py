@@ -88,8 +88,11 @@ def blah(place_dict):
     #3. id -> (2번으로 댓글목록) -> (긍, 부정)
     #   -> list를 pos_list, neg_list 분리
     #   -> 긍정 퍼센테이지 계산
-    for id in place_dict:
-        st.write(ma.masked_array(place_dict[id], mask=is_positive_sentences(place_dict[id])))
+    test_case = ["맛있다", "존나 맛없다", "개같다"]
+    test_label= [1, 0, 0]
+    st.write(ma.masked_array(test_case, mask=test_label)
+    #for id in place_dict:
+    #    st.write(ma.masked_array(place_dict[id], mask=is_positive_sentences(place_dict[id])))
         
         
     
