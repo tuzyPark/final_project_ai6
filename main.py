@@ -230,11 +230,11 @@ def blah2():
         with st.expander(f'{id} 긍정 댓글 백분율 : {temp_dict[id]["pp"]}'):
             st.markdown("## 긍정")
             with st.container():
-                for pc in temp_dict["pc"]:
+                for pc in temp_dict[id]["pc"]:
                     st.markdown(f'* {pc}')
             st.markdown("## 부정")
             with st.container():
-                for nc in temp_dict["nc"]:
+                for nc in temp_dict[id]["nc"]:
                     st.markdown(f'* {nc}')
                     
 
