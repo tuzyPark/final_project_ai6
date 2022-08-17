@@ -144,7 +144,7 @@ def make_payload(business_id, display=10, page=1):
             "query": query,
             "variables": variables}
     
-def get_comments(business_id, display=10 page=1):
+def get_comments(business_id, display=10, page=1):
     """
         업체 리뷰를 가져오는 함수
         params:
