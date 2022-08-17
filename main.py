@@ -80,7 +80,7 @@ def is_positive_sentences(sentences):
     pad_new = pad_sequences(encoded, maxlen = MAX_LEN) # 패딩
     score = model.predict(pad_new).round() # 예측
     
-    return 1==score
+    return (1==score).tolist()
     
 def blah(place_dict):
     #1. 현재 위치 -> 가장 가까운 5개의 업체 id
