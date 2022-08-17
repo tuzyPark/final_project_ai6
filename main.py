@@ -99,9 +99,10 @@ def blah(place_dict):
     result_dict = {}
     for id in place_dict:
         temp_dict = {}
+        comments = np.array(place_dict[id]).reshape(-1, 1)
         mask = is_positive_sentences(place_dict[id])
-        pos_comments = place_dict[id].reshape(-1, 1)[mask]
-        neg_comments = place_dict[id].reshape(-1, 1)[~mask]
+        pos_comments = comments[mask]
+        neg_comments = comments[~mask]
         temp_dict["pc"] = pos_comments
         temp_dict["nc"] = neg_comments
         temp_dict["pp"] = (len(pos_comments)/len(place_dict) * 100).round(2)
