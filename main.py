@@ -32,7 +32,7 @@ with open('model/tokenizer.json') as f:
 
 okt = Okt()
 
-stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
+stopwords = ['개','의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
 
 loc_button = Button(label="Get Location")
 loc_button.js_on_event("button_click", CustomJS(code="""
@@ -96,8 +96,18 @@ def blah(place_dict):
     st.write(test_case[mask])
     #mask = np.array(is_positive_sentences(test_case))
     #st.write(np.array(test_case)[mask])
-    #for id in place_dict:
-    #    st.write(ma.masked_array(place_dict[id], mask=is_positive_sentences(place_dict[id])))
+    result_dict = {}
+    for id in place_dict:
+        temp_dict = {}
+        mask = is_positive_sentences(place_dict[id])
+        pos_comments = place_dict[id].reshape(-1, 1)[mask]
+        neg_comments = place_dict[id].reshape(-1, 1)[~mask]
+        temp_dict["pc"] = pos_comments
+        temp_dict["nc"] = neg_comments
+        temp_dict["pp"] = (len(pos_comments)/len(place_dict) * 100).round(2)
+        result_dict[id] = temp_dict
+    st.write(result_dict)
+        
         
         
     
