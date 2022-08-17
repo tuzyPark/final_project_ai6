@@ -65,7 +65,7 @@ def is_positive_sentence(new_sentence):
     else:
         return False
 
-def test_is_positive_sentence(sentences):
+def is_positive_sentences(sentences):
     #["맛있다", "여기 괜찮네요", "이건 어때요"]
     
     for sentence in sentences:
