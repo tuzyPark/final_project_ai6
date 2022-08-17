@@ -96,18 +96,22 @@ if result:
 
 dis=distance(result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon'], 37.563953,127.007410)    
 st.write(dis)
-#####################
-origin_lat, origin_lng = result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon']
-lat_list = df["위도"].tolist()
-lng_list = df["경도"].tolist()
 
-ds_list = []
-for lat, lng in zip(lat_list, lng_list):
-    ds_list.append(distance(origin_lat, origin_lng, lat, lng))
+def get_near_placesummary(df):
+    origin_lat, origin_lng = result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon']
+    lat_list = df["위도"].tolist()
+    lng_list = df["경도"].tolist()
+    ds_list = []
+    for lat, lng in zip(lat_list, lng_list):
+        ds_list.append(distance(origin_lat, origin_lng, lat, lng))
     df['거리'] = pd.DataFrame(ds_list)
-df=df.sort_values(by=["거리"])
+    return df.sort_values(by=["거리"]).head(5)
 #####################
-st.write(df.head(5))
+
+
+
+#####################
+st.write(get_near_placesummary(df))
 for x, y in zip(df['위도'], df['경도']):
     dis=distance(result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon'],x ,y)
     if dis<400000:
