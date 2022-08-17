@@ -230,7 +230,7 @@ st.write(blah(get_comments_5_place(get_near_placesummary(df))))
     
 #st.write(get_comments_nearest_5_place(get_near_placesummary(df)))
 
-st.write(is_positive_sentences(get_comments("35395420", 300, 1)))
+#st.write(is_positive_sentences(get_comments("35395420", 300, 1)))
 
 
 
