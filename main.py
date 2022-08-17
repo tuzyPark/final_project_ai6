@@ -5,6 +5,8 @@ import pandas as pd
 import tensorflow as tf
 import re
 import json
+from urllib import request
+import requests
 from keras.models import load_model
 from tensorflow.keras.preprocessing.text import Tokenizer, tokenizer_from_json
 from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -14,6 +16,7 @@ from bokeh.models.widgets import Button
 from bokeh.models import CustomJS
 from streamlit_bokeh_events import streamlit_bokeh_events
 from haversine import haversine
+from bs4 import BeautifulSoup
 
 
 
