@@ -150,7 +150,7 @@ def blah():
     page = 1
     id_list = ["1692610578"]
     comments_dict = {}
-    for id in id_list
+    for id in id_list:
         comments_dict[id] = get_comments(id, display, page)
     
     return comments_dict
