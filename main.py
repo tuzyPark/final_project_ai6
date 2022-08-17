@@ -105,11 +105,10 @@ def blah(place_dict):
         neg_comments = comments[~mask]
         temp_dict["pc"] = pos_comments
         temp_dict["nc"] = neg_comments
-    #    temp_dict["pp"] = round((len(pos_comments)/len(place_dict) * 100), 2)
-        st.write(len(pos_comments))
-        st.write(len(place_comments))
+        temp_dict["pp"] = round((len(pos_comments)/len(place_dict[id]) * 100), 2)
+      
         result_dict[id] = temp_dict
-    #st.write(result_dict)
+    st.write(result_dict)
         
         
         
