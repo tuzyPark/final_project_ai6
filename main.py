@@ -78,7 +78,7 @@ def test_is_positive_sentence(sentences):
     
     pad_new = pad_sequences(encoded, maxlen = MAX_LEN) # 패딩
     score = model.predict(pad_new) # 예측
-    return score.apply(lambda x: round(x))
+    return score.map(lambda x: round(x))
     
 st.write(test_is_positive_sentence(["맛있다", "여기 괜찮네요", "이건 어때요"]))
 
