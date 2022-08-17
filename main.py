@@ -91,9 +91,9 @@ def blah(place_dict):
     #   -> 긍정 퍼센테이지 계산
     test_case = np.array(["맛있다", "존나 맛없다", "개같다"])
     
+    mask = is_positive_sentences(test_case)
     test_case = test_case.reshape(-1, 1)
-    st.write(test_case[is_positive_sentences(test_case)])
-    
+    st.write(test_case[mask])
     #mask = np.array(is_positive_sentences(test_case))
     #st.write(np.array(test_case)[mask])
     #for id in place_dict:
