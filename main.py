@@ -45,6 +45,88 @@ def sentiment_predict(new_sentence):
     else:
         return str(score)+"부정 리뷰입니다.\n".format((1 - score) * 100)
 
+def get_near_placesummary(df):
+    """
+        현재 위도, 경도 기반 가장 가까운 5개 업체 정보 받아오는 함수
+    """
+    origin_lat, origin_lng = result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon']
+    lat_list = df["위도"].tolist()
+    lng_list = df["경도"].tolist()
+    ds_list = []
+    for lat, lng in zip(lat_list, lng_list):
+        ds_list.append(distance(origin_lat, origin_lng, lat, lng))
+    df['거리'] = pd.DataFrame(ds_list)
+    return df.sort_values(by=["거리"]).head(5) 
+    
+def distance(origin_lat, origin_lng, destination_lat, destination_lng):
+    origin = (origin_lat, origin_lng)
+    destination = (destination_lat,destination_lng)
+    return haversine(origin, destination, unit = 'm')    
+    
+def make_payload(business_id, display=10, page=1):
+    """
+        업체 리뷰조회를 위해서 POST 요청시 함께 보낼 payload를 만들어 줌
+        params:
+            * business_id: 업체 고유번호
+            * display: 한번에 불러올 댓글의 갯수 지정
+            * page: page 번호
+        return_value:
+            * dict{"operationName", "query", "variables"}
+    """
+    if business_id == "--------":
+        return {}
+    operationName="getVisitorReviews"
+    query = "query getVisitorReviews($input: VisitorReviewsInput) {\n  visitorReviews(input: $input) {\n    items {\n      id\n      rating\n      author {\n        id\n        nickname\n        from\n        imageUrl\n        objectId\n        url\n        review {\n          totalCount\n          imageCount\n          avgRating\n          __typename\n        }\n        theme {\n          totalCount\n          __typename\n        }\n        __typename\n      }\n      body\n      thumbnail\n      media {\n        type\n        thumbnail\n        class\n        __typename\n      }\n      tags\n      status\n      visitCount\n      viewCount\n      visited\n      created\n      reply {\n        editUrl\n        body\n        editedBy\n        created\n        replyTitle\n        __typename\n      }\n      originType\n      item {\n        name\n        code\n        options\n        __typename\n      }\n      language\n      highlightOffsets\n      apolloCacheId\n      translatedText\n      businessName\n      showBookingItemName\n      showBookingItemOptions\n      bookingItemName\n      bookingItemOptions\n      votedKeywords {\n        code\n        iconUrl\n        iconCode\n        displayName\n        __typename\n      }\n      userIdno\n      isFollowing\n      followerCount\n      followRequested\n      loginIdno\n      receiptInfoUrl\n      __typename\n    }\n    starDistribution {\n      score\n      count\n      __typename\n    }\n    hideProductSelectBox\n    total\n    showRecommendationSort\n    itemReviewStats {\n      score\n      count\n      itemId\n      starDistribution {\n        score\n        count\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
+    variables = {
+        "id": business_id,
+        "input": {
+            "businessId" : business_id,
+            #"bookingBusinessId": "390725",
+            #"businessType": "restaurant",
+            #"cidList": ["220036", "220052", "220576", "221275"],
+            "display": display,
+            "getUserStats": True,
+            "includeContent": True,
+            "includeReceiptPhotos": True,
+            "isPhotoUsed": False,
+            "item": "0",
+            "page": page
+        }
+    }
+    return {"operationName": operationName, 
+            "query": query,
+            "variables": variables}
+    
+def get_comments(business_id, display=10, page=1):
+    """
+        업체 리뷰를 가져오는 함수
+        params:
+            * business_id: 업체 고유번호
+            * display: 한번에 불러올 댓글의 갯수 지정
+            * page: page 번호
+        return_value:
+            * list [각 댓글들]
+    """
+    comments = []
+    
+    
+    try:
+        if business_id == "--------":
+            raise ValueError
+        URL = "https://pcmap-api.place.naver.com/graphql"
+        headers = {"Content-Type" : "application/json", 
+               "sec-ch-ua":'"Chromium";v="104", " Not A;Brand";v="99", "Google Chrome";v="104"'}
+
+        response = requests.post(URL, data=json.dumps(make_payload(business_id, display, page)), headers=headers)
+        dictData = json.loads(response.text)
+        for commentMeta in dictData['data']['visitorReviews']['items']:
+            comments.append(commentMeta['body'])
+    
+    except:
+        print('유효하지 않은 입력값')
+    
+    return comments
+    
 #def blah():
 #    origin_df = pd.read_csv('data/origin.csv')
 #    summary_df = pd.read_csv('data/df_placesummary.csv')
@@ -63,12 +145,20 @@ if btn_clicked:
   st.write(test_text)
 
     
-
+def blah():
+    display = 300
+    page = 1
+    id_list = ["1692610578"]
+    comments_dict = {}
+    for id in id_list
+        comments_dict[id] = get_comments(id, display, page)
     
-def distance(origin_lat, origin_lng, destination_lat, destination_lng):
-    origin = (origin_lat, origin_lng)
-    destination = (destination_lat,destination_lng)
-    return haversine(origin, destination, unit = 'm')    
+    return comments_dict
+    
+    
+    
+st.write(blah())    
+
     
     
     
@@ -97,20 +187,12 @@ if result:
 dis=distance(result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon'], 37.563953,127.007410)    
 st.write(dis)
 
-def get_near_placesummary(df):
-    origin_lat, origin_lng = result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon']
-    lat_list = df["위도"].tolist()
-    lng_list = df["경도"].tolist()
-    ds_list = []
-    for lat, lng in zip(lat_list, lng_list):
-        ds_list.append(distance(origin_lat, origin_lng, lat, lng))
-    df['거리'] = pd.DataFrame(ds_list)
-    return df.sort_values(by=["거리"]).head(5)
-#####################
 
 
 
-#####################
+
+
+
 st.write(get_near_placesummary(df))
 for x, y in zip(df['위도'], df['경도']):
     dis=distance(result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon'],x ,y)
