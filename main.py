@@ -78,8 +78,9 @@ def is_positive_sentences(sentences):
     encoded = tokenizer.texts_to_sequences(sentences) # 정수 인코딩
     
     pad_new = pad_sequences(encoded, maxlen = MAX_LEN) # 패딩
-    score = model.predict(pad_new) # 예측
-    return score.round()
+    score = model.predict(pad_new).round() # 예측
+    
+    return 1==score
     
 def blah(place_dict):
     #1. 현재 위치 -> 가장 가까운 5개의 업체 id
@@ -89,9 +90,9 @@ def blah(place_dict):
     #   -> list를 pos_list, neg_list 분리
     #   -> 긍정 퍼센테이지 계산
     test_case = ["맛있다", "존나 맛없다", "개같다"]
-    test_label= [True, False, False]
-    #st.write(ma.masked_array(test_case, mask=test_label))
-    st.write(np.array(test_case)[np.array(test_label)])
+    
+    mask = is_positive_sentence(test_case)
+    st.write(np.array(test_case)[mask])
     #for id in place_dict:
     #    st.write(ma.masked_array(place_dict[id], mask=is_positive_sentences(place_dict[id])))
         
