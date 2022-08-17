@@ -170,6 +170,7 @@ def get_comments_nearest_5_place(df):
     display = 300
     page = 1
     id_list = df["id"].tolist()
+    st.write(id_list)
     comments_dict = {}
     for id in id_list:
         comments_dict[id] = get_comments(id, display, page)
