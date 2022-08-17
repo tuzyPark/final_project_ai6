@@ -13,7 +13,7 @@ import streamlit as st
 from bokeh.models.widgets import Button
 from bokeh.models import CustomJS
 from streamlit_bokeh_events import streamlit_bokeh_events
-
+from haversine import haversine
 
 
 
@@ -48,7 +48,7 @@ def blah():
     origin_df = pd.read_csv('data/origin.csv')
     summary_df = pd.read_csv('data/df_placesummary.csv')
     df = pd.concat([origin_df, summary_df], axis=1)
-    st.dataframe(df)
+    return df
     
 
 test_text = st.text_input('긍정/부정 문장 판독', '이거 ')
@@ -64,12 +64,13 @@ if btn_clicked:
     
 blah()
     
+def distance(origin_lat, origin_lng, destination_lat, destination_lng):
+    origin = (origin_lat, origin_lng)
+    destination = (destination_lat,destination_lng)
+    return haversine(origin, destination, unit = 'm')    
     
     
     
-    
-    
-
 
 loc_button = Button(label="Get Location")
 loc_button.js_on_event("button_click", CustomJS(code="""
@@ -90,3 +91,13 @@ result = streamlit_bokeh_events(
 if result:
     if "GET_LOCATION" in result:
         st.write(result.get("GET_LOCATION"))
+        
+
+dis=distance(result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon'], 37.563953,127.007410)    
+st.write(dis)
+
+df=blah()
+for x, y in zip(df['위도'], df['경도']):
+    dis=distance(result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon'],x ,y)
+    if dis<400000:
+        pass
