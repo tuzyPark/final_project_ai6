@@ -105,9 +105,9 @@ ds_list = []
 for lat, lng in zip(lat_list, lng_list):
     ds_list.append(distance(origin_lat, origin_lng, lat, lng))
     df['거리'] = pd.DataFrame(ds_list)
-
+df=df.sort_values(by=["거리"])
 #####################
-st.write(df)
+st.write(df.head(5))
 for x, y in zip(df['위도'], df['경도']):
     dis=distance(result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon'],x ,y)
     if dis<400000:
