@@ -25,7 +25,7 @@ from bs4 import BeautifulSoup
 MAX_LEN = 30
 model_path = 'model/food_review.h5'
 model = load_model(model_path)
-df = pd.read_csv('data/last_df.csv')
+df = pd.read_csv('data/last_df_1.csv')
 with open('model/tokenizer.json') as f:
     data = json.load(f)
     tokenizer = tokenizer_from_json(data)
