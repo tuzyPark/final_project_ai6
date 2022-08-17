@@ -89,7 +89,7 @@ def blah(place_dict):
     #   -> list를 pos_list, neg_list 분리
     #   -> 긍정 퍼센테이지 계산
     test_case = ["맛있다", "존나 맛없다", "개같다"]
-    test_label= [1, 0, 0]
+    test_label= [True, False, False]
     #st.write(ma.masked_array(test_case, mask=test_label))
     st.write(np.array(test_case)[np.array(test_label)])
     #for id in place_dict:
