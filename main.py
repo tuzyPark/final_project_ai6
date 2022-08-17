@@ -244,9 +244,17 @@ dis=distance(result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon'
 st.write(dis)
 
 
+def blah2():
+    temp_dict = blah(get_comments_5_place(get_near_placesummary(df)))
+    for id in temp_dict:
+        st.write(id)
+        with st.container():
+            with st.container():
+                for ps in temp_dict[id]["pc"]:
+                    st.write(ps)
 
 
-
+blah2()
 
 
 
