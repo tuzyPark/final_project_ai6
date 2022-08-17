@@ -33,7 +33,6 @@ okt = Okt()
 
 stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
 
-
 loc_button = Button(label="Get Location")
 loc_button.js_on_event("button_click", CustomJS(code="""
     navigator.geolocation.getCurrentPosition(
@@ -49,6 +48,7 @@ result = streamlit_bokeh_events(
     refresh_on_update=False,
     override_height=75,
     debounce_time=0)
+
 
 
 def sentiment_predict(new_sentence):
@@ -148,7 +148,20 @@ def get_comments(business_id, display=10, page=1):
         print('유효하지 않은 입력값')
     
     return comments
+
+def get_comments_nearest_5_place(df):
+    display = 300
+    page = 1
+    id_list = df["id"].tolist()
+    st.write(id_list)
+    comments_dict = {}
+    for id in id_list:
+        comments_dict[id] = get_comments(str(id), display, page)
+        
     
+    return comments_dict
+
+
 #def blah():
 #    origin_df = pd.read_csv('data/origin.csv')
 #    summary_df = pd.read_csv('data/df_placesummary.csv')
@@ -167,36 +180,15 @@ if btn_clicked:
   st.write(test_text)
 
     
-def get_comments_nearest_5_place(df):
-    display = 300
-    page = 1
-    id_list = df["id"].tolist()
-    st.write(id_list)
-    comments_dict = {}
-    for id in id_list:
-        comments_dict[id] = get_comments(str(id), display, page)
-        time.sleep(0.5)
-    
-    return comments_dict
+
     
     
     
 st.write(get_comments_nearest_5_place(get_near_placesummary(df)))
 
-    
-def get_comments_nearest_5_place_():
-    display = 300
-    page = 1
-    id_list = ["35395420"]
-    st.write(id_list)
-    comments_dict = {}
-    for id in id_list:
-        comments_dict[id] = get_comments(id, display, page)
-        time.sleep(0.5)
-    
-    return comments_dict
-    
-#st.write(get_comments_nearest_5_place_())
+
+
+
 
 
 if result:
