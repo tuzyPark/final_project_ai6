@@ -80,7 +80,7 @@ def is_positive_sentences(sentences):
     pad_new = pad_sequences(encoded, maxlen = MAX_LEN) # 패딩
     score = model.predict(pad_new).round() # 예측
     
-    return (1==score).tolist()
+    return 1==score
     
 def blah(place_dict):
     #1. 현재 위치 -> 가장 가까운 5개의 업체 id
@@ -91,7 +91,7 @@ def blah(place_dict):
     #   -> 긍정 퍼센테이지 계산
     test_case = ["맛있다", "존나 맛없다", "개같다"]
     
-    mask = is_positive_sentences(test_case)
+    mask = np.array(is_positive_sentences(test_case))
     st.write(np.array(test_case)[mask])
     #for id in place_dict:
     #    st.write(ma.masked_array(place_dict[id], mask=is_positive_sentences(place_dict[id])))
