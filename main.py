@@ -51,7 +51,7 @@ result = streamlit_bokeh_events(
 
 
 
-def sentiment_predict(new_sentence):
+def is_positive_sentence(new_sentence):
     new_sentence = re.sub(r'[^ㄱ-ㅎㅏ-ㅣ가-힣 ]','', new_sentence)
     new_sentence = okt.morphs(new_sentence, stem=True) # 토큰화
     new_sentence = [word for word in new_sentence if not word in stopwords] # 불용어 제거
@@ -60,12 +60,10 @@ def sentiment_predict(new_sentence):
     
     pad_new = pad_sequences(encoded, maxlen = MAX_LEN) # 패딩
     score = float(model.predict(pad_new)) # 예측
-    
-    
     if(score > 0.5):
-        return str(score)+"긍정 리뷰입니다.\n".format(score * 100)
+        return True
     else:
-        return str(score)+"부정 리뷰입니다.\n".format((1 - score) * 100)
+        return False
 
 def get_near_placesummary(df):
     """
@@ -176,7 +174,7 @@ st.write("hello")
 
 btn_clicked = st.button('결과 보기')
 if btn_clicked:
-  st.write(sentiment_predict(test_text))
+  st.write(is_positive_sentence(test_text))
   st.write(test_text)
 
     
@@ -205,7 +203,7 @@ st.write(dis)
 
 
 
-st.write(get_near_placesummary(df))
+
 for x, y in zip(df['위도'], df['경도']):
     dis=distance(result.get("GET_LOCATION")['lat'], result.get("GET_LOCATION")['lon'],x ,y)
     if dis<400000:
