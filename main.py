@@ -160,7 +160,7 @@ def get_comments_nearest_5_place(df):
     
     
     
-st.write(get_comments_near(get_near_placesummary(df)))
+st.write(get_comments_nearest_5_place(get_near_placesummary(df)))
 
     
     
