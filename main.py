@@ -92,7 +92,8 @@ def blah(place_dict):
     test_case = ["맛있다", "존나 맛없다", "개같다"]
     
     mask = is_positive_sentences(test_case)
-    st.write(np.array(test_case)[mask])
+    st.write(mask)
+    #st.write(np.array(test_case)[mask])
     #for id in place_dict:
     #    st.write(ma.masked_array(place_dict[id], mask=is_positive_sentences(place_dict[id])))
         
