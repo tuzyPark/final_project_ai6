@@ -88,7 +88,7 @@ def blah(place_dict):
     #   -> list를 pos_list, neg_list 분리
     #   -> 긍정 퍼센테이지 계산
     for id in place_dict:
-        st.write(place_dict[id][is_positive_sentences(place_dict[id])]
+        st.write(place_dict[id][is_positive_sentences(place_dict[id])])
         
     
 
