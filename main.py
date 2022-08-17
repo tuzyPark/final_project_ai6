@@ -98,18 +98,15 @@ def blah(place_dict):
     #st.write(np.array(test_case)[mask])
     result_dict = {}
     for id in place_dict:
-        temp_dict = {}
-        comments = np.array(place_dict[id]).reshape(-1, 1)
-        mask = is_positive_sentences(place_dict[id])
-        pos_comments = comments[mask]
-        neg_comments = comments[~mask]
-        temp_dict["pc"] = pos_comments
-        temp_dict["nc"] = neg_comments
-        if len(place_dict[id]) != 0:
+        temp_dict = {"pc":[], "nc":[], "pp":-2}
+        if len(place_dict[id]) > 0:
+            comments = np.array(place_dict[id]).reshape(-1, 1)
+            mask = is_positive_sentences(place_dict[id])
+            pos_comments = comments[mask]
+            neg_comments = comments[~mask]
+            temp_dict["pc"] = pos_comments
+            temp_dict["nc"] = neg_comments
             temp_dict["pp"] = round((len(pos_comments)/len(place_dict[id]) * 100), 2)
-        else:
-            temp_dict["pp"] = -1
-      
         result_dict[id] = temp_dict
     st.write(result_dict)
         
