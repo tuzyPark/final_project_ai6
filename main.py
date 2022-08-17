@@ -66,7 +66,7 @@ def is_positive_sentence(new_sentence):
         return False
 
 def test_is_positive_sentence(sentences):
-    ["맛있다", "여기 괜찮네요", "이건 어때요"]
+    #["맛있다", "여기 괜찮네요", "이건 어때요"]
     
     for sentence in sentences:
         sentence = re.sub(r'[^ㄱ-ㅎㅏ-ㅣ가-힣 ]','', sentence)
