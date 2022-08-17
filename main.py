@@ -7,6 +7,7 @@ import re
 import json
 from urllib import request
 import requests
+import time
 from keras.models import load_model
 from tensorflow.keras.preprocessing.text import Tokenizer, tokenizer_from_json
 from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -174,6 +175,7 @@ def get_comments_nearest_5_place(df):
     comments_dict = {}
     for id in id_list:
         comments_dict[id] = get_comments(id, display, page)
+        time.sleep(0.5)
     
     return comments_dict
     
