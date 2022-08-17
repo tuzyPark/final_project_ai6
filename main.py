@@ -80,7 +80,7 @@ def is_positive_sentences(sentences):
     score = model.predict(pad_new) # 예측
     return score.round()
     
-st.write(is_positive_sentences(get_comments("35395420", 300, 1)))
+
 
 def get_near_placesummary(df):
     """
@@ -200,7 +200,7 @@ if btn_clicked:
     
 #st.write(get_comments_nearest_5_place(get_near_placesummary(df)))
 
-
+st.write(is_positive_sentences(get_comments("35395420", 300, 1)))
 
 
 
