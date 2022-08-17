@@ -80,7 +80,7 @@ def test_is_positive_sentence(sentences):
     score = model.predict(pad_new) # 예측
     return score.round()
     
-st.write(test_is_positive_sentence(["맛있다", "여기 괜찮네요", "이건 어때요"]))
+st.write(test_is_positive_sentence(["존나 노맛", "여기 괜찮네요", "이건 어때요"]))
 
 def get_near_placesummary(df):
     """
