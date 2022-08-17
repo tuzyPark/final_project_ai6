@@ -80,14 +80,14 @@ def is_positive_sentences(sentences):
     score = model.predict(pad_new) # 예측
     return score.round()
     
-def blah(5_place_dict):
+def blah(place_dict):
     #1. 현재 위치 -> 가장 가까운 5개의 업체 id
     #            -> id로 댓글 목록
     #2. 댓글 목록 -> 댓글의 긍, 부정을 알려주는 nparray
     #3. id -> (2번으로 댓글목록) -> (긍, 부정)
     #   -> list를 pos_list, neg_list 분리
     #   -> 긍정 퍼센테이지 계산
-    for place in 5_place_dict:
+    for place in place_dict:
         st.write(place)
         
     
