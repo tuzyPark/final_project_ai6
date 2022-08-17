@@ -66,7 +66,7 @@ def is_positive_sentence(new_sentence):
         return False
 
 def is_positive_sentences(sentences):
-    #["맛있다", "여기 괜찮네요", "이건 어때요"]
+    #test case: ["맛있다", "여기 괜찮네요", "이건 어때요"]
     
     for sentence in sentences:
         sentence = re.sub(r'[^ㄱ-ㅎㅏ-ㅣ가-힣 ]','', sentence)
@@ -80,7 +80,7 @@ def is_positive_sentences(sentences):
     score = model.predict(pad_new) # 예측
     return score.round()
     
-st.write(is_positive_sentences(["존나 노맛", "여기 괜찮네요", "이건 어때요"]))
+st.write(is_positive_sentences(get_comments("35395420", 300, 1))
 
 def get_near_placesummary(df):
     """
